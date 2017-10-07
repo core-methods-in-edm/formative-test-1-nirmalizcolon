@@ -1,0 +1,36 @@
+---
+title: "formative.rmd"
+author: "Nirmaliz Colón-Acosta"
+date: "10/6/2017"
+output: html_document
+---
+
+```{r upload dataset}
+library(readr)
+D1 <- read_csv("~/Downloads/HMXPC13_DI_v2_5-14-14.csv")
+View(D1)
+```
+5. What does the DI suffix that is appeneded to two of the variable names mean?
+--> De-Identified?
+
+```{r People Certified 2012}
+library(dplyr)
+D1Sub <- filter(D1, certified == 1)
+View(D1Sub)
+
+D1Sub3 <- filter(D1Sub, course_id == "HarvardX/CS50x/2012")
+D1SubOCT <- filter(D1Sub3, start_time_DI == "2012-10-15")
+
+```
+
+Total certifications = 1,287.
+Total registrations for Oct. 15, 2012 = 40
+
+
+```{r D2 - Student ID/Registration/Country}
+
+Dnew <- filter(D1, final_cc_cname_DI == "Mexico")
+vars <- c("course_id", "start_time_DI", "last_event_DI", "final_cc_cname_DI")
+D2 <- Dnew[vars]
+```
+
